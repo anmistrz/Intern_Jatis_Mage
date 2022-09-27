@@ -1,0 +1,351 @@
+.login-or-register {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.login-or-register li {
+    display: inline;
+}
+
+.navbar-index {
+    background-color: #343a40;
+}
+
+.title-heading-login {
+    color: darkslategrey;
+    font-size: 30px;
+    text-align: center;
+}
+
+.description-form {
+    color: gray;
+    font: caption;
+    text-align: center;
+}
+
+.bg-form-login {
+    width: 40%;
+    height: 100%;
+    padding: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 4px rgba(65, 65, 65, 0.13);
+}
+
+.layout-login-btn {
+    text-align: center;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.lupa-sandi {
+    text-align: center;
+    margin: 10px;
+}
+
+.credit {
+    text-align: center;
+    color: white;
+    font-size: 15px;
+}
+
+/* Homepage */
+#wrapper {
+    padding: 0px;
+}
+
+.title-header {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #2ecc71;
+    margin: 0;
+    padding: 50px;
+    overflow: hidden;
+    color: white;
+    transition: 0.3s ease-in-out;
+    text-align: center;
+}
+
+.navigasiBar {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    background-color: #f3f3f3;
+    border: 1px solid #e7e7e7;
+    overflow: hidden;
+    width: 100%;
+    transition: 0.3s ease-in-out;
+}
+
+.navigasiBar li a {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: #666;
+}
+
+.navigasiBar li a:hover {
+    background-color: #ddd;
+    transition: 0.3s ease-in-out;
+}
+
+.navigasiBar li .aktif {
+    font-family: 'Open Sans', sans-serif;
+    float: left;
+    background-color: #4CAF50;
+    color: white;
+    float: left;
+}
+
+.navigasiBar li .aktif-2 {
+    font-family: 'Open Sans', sans-serif;
+    float: left;
+    border: 1px solid #2fcc71;
+    color: #2fcc71;
+    float: right;
+    border-radius: 5px;
+}
+
+.user-profile {
+    color: #343a40;
+    font-family: 'Open Sans', sans-serif;
+    float: right;
+    font-weight: 600;
+    margin: 15px;
+}
+
+.navigasiBar li a:hover.aktif-2 {
+    background-color: #2fcc71;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+.navigasiBar li .aktif:hover {
+    background-color: #509653;
+    transition: 0.3s ease-in-out;
+}
+
+.navigasiBar li .nonaktif {
+    font-family: 'Open Sans', sans-serif;
+    float: left;
+}
+
+.section-1 p,
+.section-2 p {
+    text-align: justify;
+}
+
+.main-content {
+    padding: 20px;
+    position: relative;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+#konten {
+    width: 75%;
+    overflow: auto;
+    float: left;
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: 'Open Sans', sans-serif;
+}
+
+aside {
+    font-family: 'Open Sans';
+    float: right;
+    width: 25%;
+}
+
+.quote-day {
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0 5px 20px #00000055;
+    margin: 20px;
+}
+
+.quote-day img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px #00000055;
+}
+
+#bagianFooter {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    background-color: #2ecc71;
+    transition: 0.3s ease-in-out;
+}
+
+.gridfooterLayout {
+    display: inline-flex;
+    margin: 40px;
+    overflow: hidden;
+}
+
+.layoutFooter {
+    text-align: center;
+}
+
+.judulFooter {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    color: #fff;
+}
+
+.deskripsikiriFooter {
+    font-family: 'Open Sans';
+    font-size: 13.6px;
+    text-align: justify;
+    color: #fff;
+    line-height: 1.6;
+}
+
+.deskripsitengahFooter {
+    font-family: 'Open Sans';
+    font-size: 13.6px;
+    text-align: justify;
+    color: #fff;
+    display: flex;
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+.deskripsikananFooter {
+    font-family: 'Open Sans';
+    font-size: 13.6px;
+    text-align: justify;
+    color: #fff;
+    display: flex;
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+.gridFooter {
+    text-align: justify;
+}
+
+.gambarFooter {
+    max-width: 5%;
+    margin: 5px;
+}
+
+.gambarsosmedFooter {
+    max-width: 30%;
+    margin: 5px;
+}
+
+#profil {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    box-shadow: 0 5px 20px #00000055;
+}
+
+.profile-photo {
+    display: block;
+    width: 130px;
+    height: 130px;
+    margin: 10px auto 30px auto;
+}
+
+.bg-form-profile {
+    width: 60%;
+    height: 100%;
+    padding: 10px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 80px 0px 80px 0px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 4px rgba(65, 65, 65, 0.13);
+    background-color: rgba(117, 255, 147, 1.0);
+
+}
+
+.bg-profile {
+    background-color: #2ecc71;
+}
+
+#typed {
+    font-family: monospace;
+    font-size: 18px;
+}
+
+.profile-description {
+    padding: 10px 0px 10px 0px;
+}
+
+.textNonActive {
+    font-size: 18px;
+    font-family: monospace;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+div .profile-name {
+    font-size: 30px;
+    color: whitesmoke;
+}
+
+.layout-name {
+    width: 100%;
+    height: 100%;
+}
+
+.form-contact-title {
+    color: #2fcc71;
+}
+
+@media only screen and (max-width: 991px) {
+
+    .bg-form-login {
+        width: auto;
+        height: auto;
+
+    }
+
+    .navigasiBar li a {
+        display: block;
+        float: none;
+    }
+
+    .navigasiBar li .aktif {
+        float: none;
+    }
+
+    .navigasiBar li .nonaktif {
+        float: none;
+    }
+
+    .user-profile {
+        float: none;
+    }
+
+    .navigasiBar li .aktif-2 {
+        float: none;
+    }
+
+    aside {
+        width: 100%;
+    }
+
+    #konten {
+        width: 100%;
+    }
+
+    .bg-form-profile {
+        width: 100%;
+    }
+
+}
+
+/* @media only screen and (max-width: 960px) { */
