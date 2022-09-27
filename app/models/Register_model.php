@@ -10,6 +10,7 @@ class Register_model
 
     public function register($data)
     {
+        date_default_timezone_set("Asia/Jakarta");
         $query = "INSERT INTO users VALUES ('', :UserName, :Passwd, :OldPassword1, :OldPassword2, :DateCreated, :DateUpdated)";
         $this->db->query($query);
         $this->db->bind('UserName', $data['UserName']);

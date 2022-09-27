@@ -16,7 +16,7 @@
                 <label class="form-check-label" for="remember">Remember</label>
             </div>
             <div class="layout-login-btn mx-auto d-grid gap-2">
-                <input type="submit" value="Login" name="login" class="btn btn-primary" id="sumbit-btn">
+                <button type="submit" name="login" class="btn btn-primary" id="sumbit-btn">Login</button>
             </div>
             <div class="lupa-sandi">
                 <a href="forgot-password.php">Lupa Sandi?</a>

@@ -10,7 +10,7 @@
                     <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= BASEURL; ?>/changepasswd">Ubah Password</a>
+                    <a class="nav-link" href="<?= BASEURL; ?>/changepassword">Ubah Password</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= BASEURL; ?>/logout">Keluar</a>
@@ -19,3 +19,5 @@
         </div>
     </div>
 </nav>
+
+<h1><?= $_SESSION['UserName']; ?></h1>
