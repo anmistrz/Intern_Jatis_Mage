@@ -29,13 +29,19 @@ class Auth extends Controller
     public function create()
     {
 
-        if ($this->model('Auth_model')->register($_POST) > 0) {
-            Flasher::setFlash('berhasil', 'ditambahkan', 'success');
-            header('Location: ' . BASEURL . '/register');
-            exit;
+        if ($_POST['Passwd'] == $_POST['ConfirmPasswd']) {
+            if ($this->model('Auth_model')->register($_POST) > 0) {
+                Flasher::setFlash('Registrasi berhasil', 'ditambahkan', 'success');
+                header('Location: ' . BASEURL . '/auth/register');
+                exit;
+            } else {
+                Flasher::setFlash('Registrasi gagal', 'ditambahkan', 'danger');
+                header('Location: ' . BASEURL . '/auth/register');
+                exit;
+            }
         } else {
-            Flasher::setFlash('gagal', 'ditambahkan', 'danger');
-            header('Location: ' . BASEURL . '/register');
+            Flasher::setFlash('Registrasi gagal', 'ditambahkan', 'danger');
+            header('Location: ' . BASEURL . '/auth/register');
             exit;
         }
     }

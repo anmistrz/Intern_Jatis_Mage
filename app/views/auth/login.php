@@ -1,12 +1,10 @@
 <div class="login-box">
-  <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+      <h1>Login</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-
       <form action="<?= BASEURL; ?>/auth/login" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Username" name="UserName" required>
@@ -24,7 +22,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
@@ -33,31 +31,22 @@
               </label>
             </div>
           </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <div class="col-sm-12 mt-2">
-            <?php
-            Flasher::flash();
-            ?>
-          </div>
-          <!-- /.col -->
+        </div> -->
+        <div class="layout-login-btn d-grid gap-2 p-3">
+          <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <?php
+          Flasher::flash();
+          ?>
         </div>
       </form>
-
-
-      <!-- /.social-auth-links -->
-
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="<?= BASEURL; ?>/auth/register" class="text-center">Register a new user</a>
+      <!-- <p class="mb-1">
+        <a href="forgot-password.html">Forgot Password ?</a>
+      </p> -->
+      <p class="mb-1">Belum punya akun?
+        <a class="btn btn-link font-weight-bold" href="<?= BASEURL; ?>/auth/register">Register</a>
       </p>
     </div>
-    <!-- /.card-body -->
   </div>
-  <!-- /.card -->
 </div>
-<!-- /.login-box -->

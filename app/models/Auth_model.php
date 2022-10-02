@@ -20,13 +20,12 @@ class Auth_model extends Controller
 
         // jika usernya ada
         if ($user) {
-            if ($password == $user['Passwd']) {
+            if (password_verify($password, $user['Passwd'])) {
                 $data = [
                     'UserName' => $user['UserName'],
                 ];
                 $_SESSION = $data;
 
-                Flasher::setFlash('Login', 'berhasil', 'success');
                 header('Location: ' . BASEURL . '/home');
                 exit;
             } else {
@@ -45,7 +44,7 @@ class Auth_model extends Controller
         $query = "INSERT INTO users VALUES ('', :UserName, :Passwd, :OldPassword1, :OldPassword2, :DateCreated, :DateUpdated)";
         $this->db->query($query);
         $this->db->bind('UserName', $data['UserName']);
-        $this->db->bind('Passwd', md5($data['Passwd']));
+        $this->db->bind('Passwd', password_hash($data['Passwd'], PASSWORD_DEFAULT));
         $this->db->bind('OldPassword1', null);
         $this->db->bind('OldPassword2', null);
         $this->db->bind('DateCreated', date("Y-m-d H:i:s"));
@@ -63,7 +62,7 @@ class Auth_model extends Controller
         $password1 = null;
         $password2 = null;
         $queryUser = $this->model('User_model')->getUserByUsername($username);
-        if ($queryUser == $oldPassword) {
+        if (password_verify($oldPassword, $queryUser['Passwd'])) {
             if ($newPassword == $confirmPassword) {
                 date_default_timezone_set("Asia/Jakarta");
                 if ($_POST['OldPassword1'] != null) {
@@ -76,9 +75,9 @@ class Auth_model extends Controller
                 $this->db->query($query);
                 $this->db->bind('UserId', $id);
                 $this->db->bind('UserName', $username);
-                $this->db->bind('OldPassword1', $oldPassword);
-                $this->db->bind('OldPassword2', $password1);
-                $this->db->bind('Passwd', $newPassword);
+                $this->db->bind('OldPassword1', password_hash($oldPassword, PASSWORD_DEFAULT));
+                $this->db->bind('OldPassword2', password_hash($password1, PASSWORD_DEFAULT));
+                $this->db->bind('Passwd', password_hash($newPassword, PASSWORD_DEFAULT));
                 $this->db->bind('DateUpdated', date("Y-m-d H:i:s"));
                 $this->db->execute();
                 Flasher::setFlash('Kata sandi', 'berhasil diubah', 'success');

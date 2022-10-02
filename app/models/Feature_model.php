@@ -13,6 +13,7 @@ class Feature_model extends Controller
     }
     public function _createburstmessage()
     {
+        date_default_timezone_set("Asia/Jakarta");
         $query = "INSERT INTO history_burst_message VALUES ('', :JobId, :TrxId, :MSIDN, :Message, :CreatedDate, :DateUpdated, :Status)";
         $this->db->query($query);
         $this->db->bind('JobId', $_POST['JobId']);
@@ -48,6 +49,7 @@ class Feature_model extends Controller
             $message = $sheetData[$i]['2'];
             $msidn = preg_replace("/^0/", "+", $msidn_normal);
             $valueData++;
+            date_default_timezone_set("Asia/Jakarta");
             $query = "INSERT INTO history_burst_message VALUES ('', :JobId, :TrxId, :MSIDN, :Message, :CreatedDate, :DateUpdated, :Status)";
             $this->db->query($query);
             $this->db->bind('JobId', $data);
@@ -61,6 +63,8 @@ class Feature_model extends Controller
         }
         return $this->db->rowCount();
     }
+
+
     public function retrieveburstmessage()
     {
         $query = "SELECT * FROM history_burst_message";
@@ -78,6 +82,7 @@ class Feature_model extends Controller
     public function uploadfileburstmessage()
     {
         $uuid = Uuid::uuid1()->toString();
+        date_default_timezone_set("Asia/Jakarta");
         $query = "INSERT INTO upload_file_burst_message VALUES (:JobId, :BatchName, :FileName, :FilePath, :CreatedDate, :UpdatedDate)";
         $this->db->query($query);
         $this->db->bind('JobId', $uuid);

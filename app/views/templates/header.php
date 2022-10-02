@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard 2</title>
+    <title><?= $data['title']; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -218,7 +218,6 @@
                                     <a href="<?= BASEURL; ?>/auth/changepassword" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ubah Kata Sandi</p>
-                                        <span class="right badge badge-danger">New</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -242,13 +241,15 @@
                                 <li class="nav-item">
                                     <a href="<?= BASEURL; ?>/feature/import" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Message / Import File Message</p>
+                                        <p>Add Message / <br> Import File Message</p>
+                                        <span class="right badge badge-danger">New</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="<?= BASEURL; ?>/feature/export" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Export File</p>
+                                        <span class="right badge badge-danger">New</span>
                                     </a>
                                 </li>
                             </ul>
