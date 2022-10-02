@@ -1,0 +1,14 @@
+{
+    "name": "fajaralhijr/magangkel5",
+    "require": {
+        "ramsey/uuid": "^4.2",
+        "nesbot/carbon": "^2.62",
+        "phpoffice/phpspreadsheet": "^1.25"
+    },
+    "authors": [
+        {
+            "name": "fajarmuhamad616",
+            "email": "fajarmuhamad616@gmail.com"
+        }
+    ]
+}
