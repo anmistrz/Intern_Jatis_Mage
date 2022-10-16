@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "64499de7-5b8e-4a6d-aeb6-9641917ed802",
+		"name": "Magang Kelompok 5 API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Getting All Burst Message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('status code should be 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response header Content-Type should be application/json', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have correct property and value', () => {\r",
+							"    const responsJson = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responsJson).to.haveOwnProperty('results');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data object should have a array burst message', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.haveOwnProperty('results');\r",
+							"    pm.expect(responseJson.results).to.be.an('array');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/magangkel5/public/api/getallburstmessageapi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"magangkel5",
+						"public",
+						"api",
+						"getallburstmessageapi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adding Burst Message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('response status code should have 200 value', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test('response Content-Type header should have application/json value', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have the correct property and value', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.ownProperty('results');\r",
+							"    pm.expect(responseJson.results).to.equals(1);\r",
+							"});\r",
+							"\r",
+							"pm.test('response body data should have result: 1', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const { results } = responseJson;\r",
+							"    \r",
+							"    pm.expect(responseJson).to.ownProperty('results');\r",
+							"    pm.expect(responseJson).to.not.equals('');\r",
+							"\r",
+							"    pm.environment.set('1', responseJson.results);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "JobId",
+							"value": "c4f16f06-4c66-11ed-a4a4-3065ecc6",
+							"type": "default"
+						},
+						{
+							"key": "MSIDN",
+							"value": "62812898907777",
+							"type": "default"
+						},
+						{
+							"key": "Message",
+							"value": "Hai semuanya di sana",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/magangkel5/public/api/postinsertdataburstmessageapi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"magangkel5",
+						"public",
+						"api",
+						"postinsertdataburstmessageapi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting Specified Burst Message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('response status code should have 200 value', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('response Content-Type header should have application/json value', () => {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equals('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should be an object', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body should have the correct property and value', () =>{\r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.have.ownProperty('results');\r",
+							"});\r",
+							"\r",
+							"pm.test('response body results should contain burst message object', () =>{\r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson).to.have.ownProperty('results');\r",
+							"    pm.expect(responseJson).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test('burst message object should contain correct value for id property', () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    const data = responseJson.results.find(m => m.id === '1');\r",
+							"\r",
+							"    const expectedId = '1';\r",
+							"\r",
+							"    pm.expect(data).to.have.ownProperty('id');\r",
+							"    pm.expect(data.id).to.equals(expectedId);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/magangkel5/public/api/getburstmessageapibyid/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"magangkel5",
+						"public",
+						"api",
+						"getburstmessageapibyid",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1",
+			"type": "default"
+		}
+	]
+}
