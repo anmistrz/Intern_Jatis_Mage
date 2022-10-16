@@ -98,7 +98,7 @@ class Feature extends Controller
                     $sheet->setCellValue('A' . $rowCount,  $data['id']);
                     $sheet->setCellValue('B' . $rowCount,  $data['JobId']);
                     $sheet->setCellValue('C' . $rowCount,  $data['TrxId']);
-                    $sheet->setCellValue('D' . $rowCount,  $data['MSIDN']);
+                    $sheet->setCellValue('D' . $rowCount,  "'" . $data['MSIDN']);
                     $sheet->setCellValue('E' . $rowCount,  $data['Message']);
                     $sheet->setCellValue('F' . $rowCount,  $data['CreatedDate']);
                     $sheet->setCellValue('G' . $rowCount,  $data['UpdatedDate']);

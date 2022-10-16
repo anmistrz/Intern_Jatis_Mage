@@ -48,18 +48,33 @@ class Feature_model extends Controller
             $msidn_normal = $sheetData[$i]['1'];
             $message = $sheetData[$i]['2'];
             $msidn = preg_replace("/^0/", "+", $msidn_normal);
-            $valueData++;
-            date_default_timezone_set("Asia/Jakarta");
-            $query = "INSERT INTO history_burst_message VALUES ('', :JobId, :TrxId, :MSIDN, :Message, :CreatedDate, :DateUpdated, :Status)";
-            $this->db->query($query);
-            $this->db->bind('JobId', $data);
-            $this->db->bind('TrxId', Uuid::uuid4()->toString());
-            $this->db->bind('MSIDN', preg_replace("/^0/", "+", $msidn_normal));
-            $this->db->bind('Message', $message);
-            $this->db->bind('CreatedDate', date("Y-m-d H:i:s"));
-            $this->db->bind('DateUpdated', null);
-            $this->db->bind('Status', 'Valid');
-            $this->db->execute();
+            if (strlen($msidn) > 13 && strlen($msidn) < 15  || !ctype_alpha($msidn) && !ctype_alnum($msidn)) {
+                $valueData++;
+                date_default_timezone_set("Asia/Jakarta");
+                $query = "INSERT INTO history_burst_message VALUES ('', :JobId, :TrxId, :MSIDN, :Message, :CreatedDate, :DateUpdated, :Status)";
+                $this->db->query($query);
+                $this->db->bind('JobId', $data);
+                $this->db->bind('TrxId', Uuid::uuid4()->toString());
+                $this->db->bind('MSIDN', preg_replace("/^0/", "+", $msidn_normal));
+                $this->db->bind('Message', $message);
+                $this->db->bind('CreatedDate', date("Y-m-d H:i:s"));
+                $this->db->bind('DateUpdated', null);
+                $this->db->bind('Status', 'Valid');
+                $this->db->execute();
+            } else {
+                $valueData++;
+                date_default_timezone_set("Asia/Jakarta");
+                $query = "INSERT INTO history_burst_message VALUES ('', :JobId, :TrxId, :MSIDN, :Message, :CreatedDate, :DateUpdated, :Status)";
+                $this->db->query($query);
+                $this->db->bind('JobId', $data);
+                $this->db->bind('TrxId', Uuid::uuid4()->toString());
+                $this->db->bind('MSIDN', preg_replace("/^0/", "+", $msidn_normal));
+                $this->db->bind('Message', $message);
+                $this->db->bind('CreatedDate', date("Y-m-d H:i:s"));
+                $this->db->bind('DateUpdated', null);
+                $this->db->bind('Status', 'Invalid');
+                $this->db->execute();
+            }
         }
         return $this->db->rowCount();
     }
@@ -68,6 +83,13 @@ class Feature_model extends Controller
     public function retrieveburstmessage()
     {
         $query = "SELECT * FROM history_burst_message";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+    public function retrieveburstmessagebyid($id)
+    {
+        $query = "SELECT * FROM history_burst_message WHERE id='$id'";
         $this->db->query($query);
         return $this->db->resultSet();
     }
