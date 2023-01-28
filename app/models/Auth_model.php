@@ -1,4 +1,6 @@
+
 <?php
+
 class Auth_model extends Controller
 {
     private $db;
@@ -30,20 +32,22 @@ class Auth_model extends Controller
                 exit;
             } else {
                 Flasher::setFlash('Login gagal,', 'password salah', 'danger');
-                header('Location: ' . BASEURL . '/auth');
+                header('Location: ' . BASEURL . '/auth/signin');
             }
         } else {
             Flasher::setFlash('Login gagal,', 'akun belum terdaftar', 'danger');
-            header('Location: ' . BASEURL . '/auth');
+            header('Location: ' . BASEURL . '/auth/signin');
         }
     }
 
     public function register($data)
     {
         date_default_timezone_set("Asia/Jakarta");
-        $query = "INSERT INTO users VALUES ('', :UserName, :Passwd, :OldPassword1, :OldPassword2, :DateCreated, :DateUpdated)";
+        $query = "INSERT INTO users VALUES ('', :UserName, :fullname, :email, :Passwd, :OldPassword1, :OldPassword2, :DateCreated, :DateUpdated)";
         $this->db->query($query);
         $this->db->bind('UserName', $data['UserName']);
+        $this->db->bind('fullname', $data['fullname']);
+        $this->db->bind('email', $data['email']);
         $this->db->bind('Passwd', password_hash($data['Passwd'], PASSWORD_DEFAULT));
         $this->db->bind('OldPassword1', null);
         $this->db->bind('OldPassword2', null);
@@ -91,5 +95,43 @@ class Auth_model extends Controller
             Flasher::setFlash('Kata sandi', 'gagal diubah', 'danger');
             header('Location: ' . BASEURL . '/auth/changepassword');
         }
+    }
+
+    public function checkEmail($data)
+    {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $this->db->query($query);
+        $this->db->bind('email', $data['email']);
+        //$this->db->execute();
+        //return $this->db->rowCount();
+        $data =  $this->db->single();
+        $_SESSION['UserId'] = $data['UserId'];
+        return $data;
+    }
+
+    public function updateResetPassword($data)
+    {
+        $query = "UPDATE users SET Passwd=:Passwd WHERE UserId=:UserId";
+        $this->db->query($query);
+        $this->db->bind('UserId', $data['UserId']);
+        $this->db->bind('Passwd', password_hash($data['Passwd'], PASSWORD_DEFAULT));
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+    public function cekUsername()
+    {
+        $username = $_POST['UserName'];
+        $this->db->query("SELECT * FROM users WHERE UserName = :UserName");
+        $this->db->bind('UserName', $username);
+        return $this->db->single();
+    }
+
+    public function cekEmailSignUp()
+    {
+        $email = $_POST['email'];
+        $this->db->query("SELECT * FROM users WHERE email = :email");
+        $this->db->bind('email', $email);
+        return $this->db->single();
     }
 }

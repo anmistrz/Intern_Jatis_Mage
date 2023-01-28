@@ -6,7 +6,7 @@
 
 <!-- Main Footer -->
 <footer class="main-footer">
-    <strong>Copyright &copy; 2022 <a href="<?= BASEURL; ?>">Kelompok 5 Virtuas</a>.</strong>
+    <strong>Copyright &copy; 2022 <a class="text-green" href="<?= BASEURL; ?>">Mage Group | Jatis Mobile Internship Batch-03</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> Alpha 1.0.0

@@ -1,6 +1,17 @@
 <?php
 class Api extends Controller
 {
+    public function index()
+    {
+        if (isset($_SESSION['UserName'])) {
+            $data['title'] = 'List API ';
+            $this->view('templates/header', $data);
+            $this->view('feature/listapi', $data);
+            $this->view('templates/footer');
+        } else {
+            header('Location: ' . BASEURL . '/auth/login');
+        }
+    }
     public function getallburstmessageapi()
     {
         $this->view('feature/api');
@@ -12,7 +23,7 @@ class Api extends Controller
                 "code" => 200,
                 "description" => 'Request valid'
             ];
-            $this->model("Api_model")->_getallburstmessageapi();
+            $this->model("Api_model")->_getcontentapi();
         } else {
             $result['status'] = [
                 "code" => 400,
@@ -25,32 +36,13 @@ class Api extends Controller
         $this->view('feature/api');
         $method = $_SERVER['REQUEST_METHOD'];
         $result = array();
-        // $data = explode("?", $_SERVER['REQUEST_URI'])[1];
-        // $explodeMsidnAndTrxid = explode("&", $data);
 
         if ($method == 'GET') {
             $result['status'] = [
                 "code" => 200,
                 "description" => 'Request valid'
             ];
-            // if ($explodeMsidnAndTrxid) {
-            //     foreach ($explodeMsidnAndTrxid as $trxid) {
-            //         $data =  explode("=", $trxid);
-            //         if ($data[0] == 'msidn') {
-            //             var_dump($data[1]);
-            //         }
-            //         if ($data[0] == 'trxid') {
-            //             var_dump($data[1]);
-            //         }
-            //     }
-            $this->model("Api_model")->_getburstmessageapibyid($id);
-            // } else {
-            //     $result['status'] = [
-            //         "code" => 400,
-            //         "description" => 'Parameter invalid'
-            //     ];
-            //     echo json_encode($result);
-            // }
+            $this->model("Api_model")->_getcontentapibyid($id);
         } else {
             $result['status'] = [
                 "code" => 400,
@@ -59,31 +51,37 @@ class Api extends Controller
             echo json_encode($result);
         }
     }
-    public function postinsertdataburstmessageapi()
+    public function inserthitapi()
     {
         $this->view('feature/api');
         $method = $_SERVER['REQUEST_METHOD'];
-        $result = array();
+        $data = file_get_contents("php://input");
+        $jsonDecode = json_decode($data, true);
+        $input = '48XXXXXXXXX';
+        $waId = '48XXXXXXXXX';
+        $dataModel = $this->model('Api_model')->_postcontenthitapi($jsonDecode['to'], $jsonDecode['text']['body'], $jsonDecode['messaging_product'], $jsonDecode['recipient_type'], $jsonDecode['type'], $jsonDecode['text']['preview_url'], $input, $waId);
         if ($method == 'POST') {
-            if (isset($_POST['JobId']) && isset($_POST['MSIDN']) && isset($_POST['Message'])) {
-                $result['status'] = [
-                    "code" => 200,
-                    "description" => '1 Data Inserted'
+            $result =
+                [
+                    "messaging_product" => $jsonDecode['messaging_product'],
+                    "contacts" =>  array(
+                        [
+                            "input" => $input,
+                            "wa_id" => $waId
+                        ],
+                    ),
+                    "messages" => array(
+                        [
+                            "id" => $dataModel
+                        ],
+                    )
                 ];
-                $this->model("Api_model")->_postinsertburstmessageapi();
-            } else {
-                $result['status'] = [
-                    "code" => 400,
-                    "description" => 'Method not valid'
-                ];
-                echo json_encode($result);
-            }
         } else {
-            $result['status'] = [
+            $result = [
                 "code" => 400,
-                "description" => 'Method not valid'
+                "description" => 'Request not valid'
             ];
-            echo json_encode($result);
         }
+        echo json_encode($result);
     }
 }

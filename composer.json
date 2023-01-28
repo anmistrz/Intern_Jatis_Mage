@@ -3,7 +3,8 @@
     "require": {
         "ramsey/uuid": "^4.2",
         "nesbot/carbon": "^2.62",
-        "phpoffice/phpspreadsheet": "^1.25"
+        "phpoffice/phpspreadsheet": "^1.25",
+        "phpmailer/phpmailer": "^6.6"
     },
     "authors": [
         {

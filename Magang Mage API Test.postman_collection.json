@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "64499de7-5b8e-4a6d-aeb6-9641917ed802",
-		"name": "Magang Kelompok 5 API Test",
+		"name": "Magang Mage API Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -82,23 +82,7 @@
 							"    const responseJson = pm.response.json();\r",
 							"    pm.expect(responseJson).to.be.an('object');\r",
 							"});\r",
-							"\r",
-							"pm.test('response body should have the correct property and value', () => {\r",
-							"    const responseJson = pm.response.json();\r",
-							"\r",
-							"    pm.expect(responseJson).to.ownProperty('results');\r",
-							"    pm.expect(responseJson.results).to.equals(1);\r",
-							"});\r",
-							"\r",
-							"pm.test('response body data should have result: 1', () => {\r",
-							"    const responseJson = pm.response.json();\r",
-							"    const { results } = responseJson;\r",
-							"    \r",
-							"    pm.expect(responseJson).to.ownProperty('results');\r",
-							"    pm.expect(responseJson).to.not.equals('');\r",
-							"\r",
-							"    pm.environment.set('1', responseJson.results);\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -108,36 +92,25 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "JobId",
-							"value": "c4f16f06-4c66-11ed-a4a4-3065ecc6",
-							"type": "default"
-						},
-						{
-							"key": "MSIDN",
-							"value": "62812898907777",
-							"type": "default"
-						},
-						{
-							"key": "Message",
-							"value": "Hai semuanya di sana",
-							"type": "default"
+					"mode": "raw",
+					"raw": "{\r\n    \"messaging_product\": \"whatsapp\",\r\n    \"recipient_type\": \"individual\",\r\n    \"to\": \"62812345678910\",\r\n    \"type\": \"text\",\r\n    \"text\": {\r\n        \"preview_url\": false,\r\n        \"body\": \"Halo selamat pagi\"\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "http://localhost/magangkel5/public/api/postinsertdataburstmessageapi",
+					"raw": "http://localhost/magangkelmage/public/api/inserthitapi",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"magangkel5",
+						"magangkelmage",
 						"public",
 						"api",
-						"postinsertdataburstmessageapi"
+						"inserthitapi"
 					]
 				}
 			},

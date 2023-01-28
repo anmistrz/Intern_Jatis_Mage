@@ -10,7 +10,15 @@ class Feature extends Controller
 {
     public function index()
     {
-        header('Location: ' . BASEURL . '/feature/import');
+        if (isset($_SESSION['UserName'])) {
+            $data['title'] = 'Batch your file';
+            $data['burst_history_message'] = $this->model("Feature_model")->retrieveburstmessage();
+            $this->view('templates/header', $data);
+            $this->view('feature/index', $data);
+            $this->view('templates/footer');
+        } else {
+            header('Location: ' . BASEURL . '/auth/login');
+        }
     }
     public function import()
     {
@@ -19,7 +27,7 @@ class Feature extends Controller
             $data['burst_history_message'] = $this->model("Feature_model")->retrieveburstmessage();
             $data['job_id'] = $this->model("Feature_model")->retrievejobid();
             $this->view('templates/header', $data);
-            $this->view('feature/import', $data);
+            $this->view('feature/index', $data);
             $this->view('templates/footer');
         } else {
             header('Location: ' . BASEURL . '/auth/login');
@@ -51,6 +59,7 @@ class Feature extends Controller
         }
     }
 
+    
     public function createburstmessagefromfile()
     {
         if ($this->model("Feature_model")->_createburstmessagefromfile() > 0) {
@@ -76,6 +85,21 @@ class Feature extends Controller
             header('Location: ' . BASEURL . '/feature/import');
         }
     }
+
+    public function random_strings($length_of_string)
+    {
+
+        // String of all alphanumeric character
+        $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        // Shuffle the $str_result and returns substring
+        // of specified length
+        return substr(
+            str_shuffle($str_result),
+            0,
+            $length_of_string
+        );
+    }
     public function exporthistoryburstmessage()
     {
         $ext = $_POST['export_file_type'];
@@ -84,29 +108,33 @@ class Feature extends Controller
             if ($this->model("Feature_model")->retrieveburstmessage() > 0) {
                 $spreadsheet = new Spreadsheet();
                 $sheet = $spreadsheet->getActiveSheet();
-                $sheet->setCellValue('A1', 'id');
-                $sheet->setCellValue('B1', 'JobId');
-                $sheet->setCellValue('C1', 'TrxId');
-                $sheet->setCellValue('D1', 'MSIDN');
-                $sheet->setCellValue('E1', 'Message');
-                $sheet->setCellValue('F1', 'CreatedDate');
-                $sheet->setCellValue('G1', 'UpdatedDate');
-                $sheet->setCellValue('H1', 'Status');
+                $sheet->setCellValue('A1', 'JobId');
+                $sheet->setCellValue('B1', 'TrxId');
+                $sheet->setCellValue('C1', 'BatchName');
+                $sheet->setCellValue('D1', 'Message');
+                $sheet->setCellValue('E1', 'MSISDN');
+                $sheet->setCellValue('F1', 'Input');
+                $sheet->setCellValue('G1', 'WA_ID');
+                $sheet->setCellValue('H1', 'MessageId');
+                $sheet->setCellValue('I1', 'Response');
+                $sheet->setCellValue('J1', 'CreatedDate');
+                $sheet->setCellValue('K1', 'UpdatedDate');
 
                 $rowCount = 2;
                 foreach ($this->model("Feature_model")->retrieveburstmessage() as $data) {
-                    $sheet->setCellValue('A' . $rowCount,  $data['id']);
-                    $sheet->setCellValue('B' . $rowCount,  $data['JobId']);
-                    $sheet->setCellValue('C' . $rowCount,  $data['TrxId']);
-                    $sheet->setCellValue('D' . $rowCount,  "'" . $data['MSIDN']);
-                    $sheet->setCellValue('E' . $rowCount,  $data['Message']);
-                    $sheet->setCellValue('F' . $rowCount,  $data['CreatedDate']);
-                    $sheet->setCellValue('G' . $rowCount,  $data['UpdatedDate']);
-                    $sheet->setCellValue('H' . $rowCount,  $data['Status']);
+                    $sheet->setCellValue('A' . $rowCount,  $data['JobId']);
+                    $sheet->setCellValue('B' . $rowCount,  $data['TrxId']);
+                    $sheet->setCellValue('C' . $rowCount, $data['BatchName']);
+                    $sheet->setCellValue('D' . $rowCount,  $data['Message']);
+                    $sheet->setCellValue('E' . $rowCount,  "'" . $data['MSISDN']);
+                    $sheet->setCellValue('F' . $rowCount, $data['WA_ID']);
+                    $sheet->setCellValue('G' . $rowCount, $data['Input']);
+                    $sheet->setCellValue('H' . $rowCount, $data['MessageId']);
+                    $sheet->setCellValue('I' . $rowCount, $data['Status'] == 'Valid' ? 200 : 404);
+                    $sheet->setCellValue('J' . $rowCount,  $data['DateCreated']);
+                    $sheet->setCellValue('K' . $rowCount,  $data['DateUpdated']);
                     $rowCount++;
                 }
-
-
                 if ($ext == 'xlsx') {
                     $writer = new Xlsx($spreadsheet);
                     $final_filename = $filename . '.xlsx';

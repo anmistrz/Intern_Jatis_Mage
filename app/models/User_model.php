@@ -2,18 +2,11 @@
 class User_model
 {
     private $db;
-    private $nama = 'Hijri';
 
     public function __construct()
     {
         $this->db = new Database;
     }
-
-    public function getUser()
-    {
-        return $this->nama;
-    }
-
 
     public function getUserByUsername($username)
     {
